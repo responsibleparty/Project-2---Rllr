@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/responsibleparty/Project-2---Rllr/issues"
   },
-  "homepage": "https://github.com/responsibleparty/Project-2---Rllr#readme"
+  "homepage": "https://github.com/responsibleparty/Project-2---Rllr#readme",
+  "dependencies": {
+    "pokedex-promise-v2": "^4.0.0"
+  }
 }
