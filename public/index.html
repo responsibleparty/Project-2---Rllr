@@ -7,22 +7,30 @@
     <title>Pokemon</title>
     <script src="index.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
-    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="./css/style.css">
+    <link href="http://fonts.cdnfonts.com/css/pokemon-solid" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/61fc9f6745.js" crossorigin="anonymous"></script>
+                
 </head>
 <body>
-    <div id="header-container" class="ui inverted segment">
-        <div class="ui inverted secondary menu">
-           <h1 id="header-text">Kanto Pokemon</h1>
-        </div>
-    </div>
-    <div id="container">
-        <div id="poke-container" class="ui cards">
-                <!-- will hold the cards for all the pokemon -->
-                <button id="generate-pokemon" class="ui secondary button">Generate Pokemon</button>
-        </div>
-    </div>
-    <div id="delete-container">
-        <button id="delete-btn" class="ui red button">Delete</button>
-    </div>
+    <header id="pageHeader">
+        <img id="pageBanner" src="./images/PokemonBanner.jpeg" alt="Pikachu">
+        <p id="siteTitle"></p>
+        <nav id="navBar">
+            <button><i class="fa-solid fa-power-off"></i></button>
+        </nav>
+    </header>
+
+    <main>
+        <p>Welcome</p>
+    </main>
+
+    <!-- <main id="mainContent">
+        <div id="renderedArea"></div>
+        <button class="editButtons" id="pokeContainer">Generate Pokémon</button>
+        <button class="editButtons" id="deletePokemon">Delete Pokémon</button>
+    </main> -->
+    
 </body>
 </html>
+
