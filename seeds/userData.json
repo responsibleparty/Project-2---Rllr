@@ -1,0 +1,26 @@
+[{
+    "name": "Cecilia",
+    "email": "cecilia@cecilia.com",
+    "password": "rootroot",
+    "team_id": "1"
+}, {
+    "name": "Hai",
+    "email": "hai@hai.com",
+    "password": "rootroot",
+    "team_id": "2"
+}, {
+    "name": "Marshall",
+    "email": "marshall@marshall.com",
+    "password": "rootroot",
+    "team_id": "3"
+}, {
+    "name": "Patrick",
+    "email": "patrick@patrick.com",
+    "password": "rootroot",
+    "team_id": "4"
+}, {
+    "name": "Richmond",
+    "email": "richmond@richmond.com",
+    "password": "rootroot",
+    "team_id": "5"
+}]
