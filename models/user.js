@@ -35,14 +35,14 @@ User.init({
         allowNull: false,
         validate: {
             len: [8],
-        },
-        team_id: {
-            type: DataType.INTEGER,
-            allowNull: false,
-            references: {
-                model: 'team',
-                key: 'id',
-            }
+        }
+    },
+    team_id: {
+        type: DataType.INTEGER,
+        allowNull: false,
+        references: {
+            model: 'team',
+            key: 'id',
         }
     },
 }, {
