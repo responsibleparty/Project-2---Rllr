@@ -1,0 +1,47 @@
+<div class="row">
+
+    <div class="col-md-4 mb-2">
+        {{> poke-card this}}
+    </div>
+    <div class="col-md-8">
+        <h3>Detail of {{name}}</h3>
+        <div id='passingData' class="hidden" data-pokeid="{{api_id}}"></div>
+        <div id="detail-stats">
+
+        </div>
+    </div>
+</div>
+
+
+<script>
+    
+
+    (async () => {
+        const pokeid = document.querySelector('#passingData').dataset.pokeid;
+      
+        const pokedata = await fetch(`https://pokeapi.co/api/v2/pokemon/${(pokeid)}`).then(data=>data.json())
+        console.log(pokedata.moves)
+
+        const moves_arr = [];
+        for(let move of pokedata.moves){
+            const accurate = await fetch(move.move.url).then(d=>d.json())
+           console.log(accurate)
+           moves_arr.push({
+                name: move.move.name,
+
+           })
+        }
+        console.log(moves_arr)
+        let htmlTemplate = `
+            <h3>Moves</h3>
+            <ul>
+        
+        `;
+        for(let move of pokedata.moves){
+            htmlTemplate += `<li> <a href='${move.move.url}'>${move.move.name} ${ fetch(move.move.url).then(d=>d.json()).then(d=>d.accuracy)}</a></li>`
+        }
+        htmlTemplate += '</ul>'
+        document.querySelector('#detail-stats').innerHTML = htmlTemplate
+    })()
+
+</script>

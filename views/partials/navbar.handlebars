@@ -1,0 +1,26 @@
+<nav class="navbar bg-primary text-light">
+    <div class="container-lg">
+        <a href="/" class="navbar-brand text-white"> <span class="h1">Pokemon</span></a>
+
+        <ul class="nav nav-pills text-white">
+
+            {{#if logged_in}}
+            <li class="nav-item">
+                <a class="nav-link" href="/dashboard"> {{currentUser}}'s Dashboard</a>
+            </li>
+            <li class="nav-item">
+                <button class="nav-link" id="logout-btn">Logout</button>
+            </li>
+
+            {{/if}}
+            
+            {{#unless logged_in}}
+            <li class="nav-item">
+                <a class="nav-link" href="/login">Login</a>
+            </li>
+            {{/unless}}
+            
+        </ul>
+
+    </div>
+</nav>

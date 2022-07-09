@@ -1,0 +1,48 @@
+<div class="row post-grid">
+    {{#each posts as |post|}}
+    <div class="col-12 mb-3">
+        <div class="card ">
+            <div class="card-header">
+                <h3 class="card-title">{{post.name}}</h3>
+                <p class="card-subtitle mb-2 text-muted small ">{{format_time post.date_created}}</p>
+            </div>
+            <div class="card-body">
+
+                <pre style="white-space: pre-line">{{post.description}}</pre>
+            </div>
+            <div class="card-footer d-grid gap-2 d-md-flex justify-content-md-end">
+                <button class="delPostBtn btn btn-light" data-postId="{{post.id}}">Remove</button>
+                <button class="editPostBtn btn btn-primary" data-postId="{{post.id}}" data-bs-toggle="modal"
+                    data-bs-target="#editpostmodal">Edit</button>
+            </div>
+
+        </div>
+    </div>
+    {{/each}}
+</div>
+
+<div class="modal fade" id="editpostmodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="editpostmodalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-warning">
+                <h3 class="modal-title">EDIT POST</h3>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="editPostForm">
+                    <div class="mb-3">
+                        <label for="edit_post_name" class="form-label">Name</label>
+                        <input type="text" class="form-control" id="edit_post_name" aria-describedby="emailHelp">
+                    </div>
+                    <div class="mb-3">
+                        <label for="edit_post_description" class="form-label">Description</label>
+                        <textarea class="form-control" placeholder="Leave a comment here"
+                            id="edit_post_description"></textarea>
+                    </div>
+                    <button class="btn btn-primary">UPDATE</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
