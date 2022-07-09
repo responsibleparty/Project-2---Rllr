@@ -1,7 +1,7 @@
 const withAuth = require('../../utils/auth')
 const router = require('express').Router();
 const Comment = require('../../models/Comment')
-//adding this comment so git tracks the change.
+
 
 // CREATE COMMENTS
 router.post('/', withAuth, async (req, res) => {
