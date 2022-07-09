@@ -2,6 +2,7 @@ const withAuth = require('../../utils/auth')
 const router = require('express').Router();
 const Comment = require('../../models/Comment')
 
+
 // CREATE COMMENTS
 router.post('/', withAuth, async (req, res) => {
     try {
