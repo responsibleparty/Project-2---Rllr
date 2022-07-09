@@ -1,12 +1,15 @@
-html, body{
+html,
+body {
     width: 100%;
     height: 100%;
     padding: 35px;
 }
-body{
-    background-color:#38569E;
+
+body {
+    background-color: #38569E;
 }
-#pageBanner{
+
+#pageBanner {
     width: 100%;
     height: 30%;
     position: relative;
@@ -15,7 +18,8 @@ body{
 #pageHeader {
     position: relative;
 }
-#navBar{
+
+#navBar {
     float: right;
     position: absolute;
     top: 10px;
@@ -27,16 +31,85 @@ main {
     justify-content: center;
     background-color: #dc001a;
 }
-main p{
+
+main p {
     font-family: 'Pokemon Solid', sans-serif;
-    color:#FFD229;                                    font-size: 70px;
+    color: #FFD229;
+    font-size: 70px;
 }
+
 #logInBttn {
     background-color: transparent;
     font-size: large;
     border: none;
     cursor: pointer;
 }
-#logInBttn:hover{
+
+#logInBttn:hover {
     font-size: larger;
+}
+
+.nav-item .nav-link {
+    color: white;
+}
+
+#card {
+    position: relative;
+    width: 100%;
+    padding: 30px 20px;
+    box-shadow: 0 20px 30px rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+}
+
+#card img {
+    display: block;
+    width: 180px;
+    max-height: 200px;
+    position: relative;
+    margin: 20px auto;
+}
+
+.hp {
+    width: 80px;
+    background-color: #ffffff;
+    text-align: center;
+    padding: 8px 0;
+    border-radius: 30px;
+    margin-left: auto;
+    font-weight: 400;
+}
+
+.poke-name {
+    text-align: center;
+    font-weight: 600;
+}
+
+.types {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px 0 40px 0;
+}
+
+.hp span,
+.types span {
+    font-size: 12px;
+    letter-spacing: 0.4px;
+    font-weight: 600;
+}
+
+.types span {
+    padding: 5px 20px;
+    border-radius: 20px;
+    color: #ffffff;
+}
+
+.stats {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-align: center;
+}
+
+.stats p {
+    color: #404060;
 }
