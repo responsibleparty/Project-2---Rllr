@@ -1,5 +1,8 @@
 # Project-2---Rllr
 Project 2 - Rllr
+<<<<<<< HEAD
+Hi
+=======
 
 Rllr
 
@@ -41,3 +44,4 @@ Team Breakdown so-far:
 2.
 3.
 4.
+>>>>>>> refs/remotes/origin/main

@@ -1,0 +1,22 @@
+<h2>POKEDEX sadf asdfa</h2>
+
+{{#each pokecards as |card|}}
+    <p>poke id: {{card}}</p>
+{{/each}}
+
+<p id='hiddendata' data-hidden="{{datastr}}">hidden {{datastr}}</p>
+
+
+<div class="row">
+    {{#each pokedex as |card| }}
+        <div class="col-md-4 mb-2">
+            {{> poke-card card}}
+        </div>
+    {{/each}}
+</div>
+
+
+
+<div id="showcard"></div>
+<script src="https://unpkg.com/pokeapi-js-wrapper/dist/index.js"></script>
+<script src="./js/pokedex.js"></script>

@@ -1,0 +1,82 @@
+<style>
+  .hide {
+    display: none;
+  }
+
+  .block {
+    display: block;
+  }
+</style>
+
+<div class="container-lg pt-3">
+  <div class="row">
+    <div class="col-md-6 loginForm block">
+      <div class="card">
+        <div class="card-header">
+          <h3>LOGIN FORM</h3>
+        </div>
+        <div class="card-body">
+
+          <form id="login-form">
+            <div class="mb-3">
+              <label for="login-username" class="form-label">Username</label>
+              <input type="text" class="form-control" id="login-username" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3">
+              <label for="login-pwd" class="form-label">Password</label>
+              <input type="password" class="form-control" id="login-pwd">
+            </div>
+            <button type="submit" class="btn btn-primary">Login</button>
+            <button class="btn btn-link signinInstead">Sign Up instead</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6 signupForm hide">
+      <div class="card">
+        <div class="card-header">
+          <h3>SIGN UP FORM</h3>
+        </div>
+        <div class="card-body">
+          <form id="signup-form">
+            <div class="mb-3">
+              <label for="signup-username" class="form-label">Username</label>
+              <input type="text" class="form-control" id="signup-username" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3">
+              <label for="signup-pwd" class="form-label">Password</label>
+              <input type="password" class="form-control" id="signup-pwd">
+            </div>
+            <button type="submit" class="btn btn-primary">Sign Up</button>
+            <button class="btn btn-link loginInstead">Login instead</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+{{!-- mini script to toggle the form --}}
+<script>
+  let wantLogin = true;
+  const loginForm = document.querySelector('.loginForm');
+  const signinForm = document.querySelector('.signupForm')
+
+  const toggleForm = (e) => {
+    e.preventDefault();
+    wantLogin = !wantLogin;
+
+    signinForm.classList.toggle('block')
+    signinForm.classList.toggle('hide')
+    loginForm.classList.toggle('block')
+    loginForm.classList.toggle('hide')
+
+  }
+  document.querySelector('.loginInstead').addEventListener('click', toggleForm)
+  document.querySelector('.signinInstead').addEventListener('click', toggleForm)
+
+</script>
+
+
+<script src="js/login.js"></script>
