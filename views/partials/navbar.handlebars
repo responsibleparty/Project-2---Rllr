@@ -1,9 +1,18 @@
 <nav class="navbar bg-primary text-light">
     <div class="container-lg">
         <a href="/" class="navbar-brand text-white"> <span class="h1">Pokemon</span></a>
-
+  
         <ul class="nav nav-pills text-white">
-
+            <li class="nav-item">
+                <a class='nav-link' href="/pokedex">All</a>
+            </li>
+            <li class="nav-item">
+                <a class='nav-link' href="/pokeown">Own</a>
+            </li>
+            <li class="nav-item">
+                <a class='nav-link' href="/pokedetail">Detail</a>
+            </li>
+            
             {{#if logged_in}}
             <li class="nav-item">
                 <a class="nav-link" href="/dashboard"> {{currentUser}}'s Dashboard</a>
