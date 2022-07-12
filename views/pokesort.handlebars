@@ -9,11 +9,14 @@
 
 <div id="result">
     <h4 class="result-found"></h4>
-    <div class="display"></div>
+    <div id="display"></div>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
 
 <script>
+   
+
 
     (async () => {
         const allPoke = await fetch('/api/pokemons').then(data => data.json());
@@ -23,13 +26,16 @@
        const showme = async (e)=>{
         e.preventDefault()
         console.log(e.target.value)
-        let htmlTemplate =''
+        let htmlTemplate ="<div class='row'>"
         const filter = await allPoke.filter(poke=>poke.name.startsWith(e.target.value)).map((poke,index)=>{
-            htmlTemplate += buildMyCard(poke,index)
+            htmlTemplate += "<div class='col-md-4 p-2'>" + buildMyCard(poke,index) +"</div>";
         })
-        
+        htmlTemplate += "</div>"
         document.querySelector('#result .result-found').textContent = `${filter.length} result(s) found`;
-        document.querySelector('#result .display').innerHTML = await htmlTemplate
+        document.querySelector('#result #display').innerHTML = await htmlTemplate
+
+         const el = document.querySelector('#display .row');
+        const sortable = new Sortable.create(el,{handle:'.handle',animation:150});
        }
 
        
