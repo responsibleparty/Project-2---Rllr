@@ -20,18 +20,14 @@
     (async () => {
         const allPoke = await fetch('/api/pokemons').then(data => data.json());
     
-    const buildcard = (poke,index) => {
-        return `
-            <li>${capitalize(poke.name)}</li>
-        `
-    }
+   
 
        const showme = async (e)=>{
         e.preventDefault()
         console.log(e.target.value)
         let htmlTemplate =''
         const filter = await allPoke.filter(poke=>poke.name.startsWith(e.target.value)).map((poke,index)=>{
-            htmlTemplate += buildcard(poke,index)
+            htmlTemplate += buildMyCard(poke,index)
         })
         
         document.querySelector('#result .result-found').textContent = `${filter.length} result(s) found`;
