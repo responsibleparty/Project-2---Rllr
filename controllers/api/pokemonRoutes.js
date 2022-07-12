@@ -49,7 +49,6 @@ router.get('/:query', async (req, res) => {
         res.status(500).json(error)
     }
 })
-
 router.get('/', async (req,res)=>{
     try {
         const pokeData = await Pokedex.findAll();
