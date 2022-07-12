@@ -1,14 +1,10 @@
-# Project-2---Rllr
-Project 2 - Rllr
-<<<<<<< HEAD
-Hi
+# Project-2---RllrDex
+Cecilia, Hai, Marshall, Patrick, Richmond
+
+# Overview
 =======
 
 Rllr
-
-
-https://docs.pokemontcg.io/
-https://documenter.getpostman.com/view/12403653/TVK8cLiK
 
 possible pokemon API to use.
 
