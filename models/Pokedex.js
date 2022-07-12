@@ -83,6 +83,11 @@ Pokedex.init(
             allowNull: false,
             length:9999
             
+        },
+        moves_url:{
+            type: DataTypes.TEXT,
+            allowNull: false,
+            length:9999
         }
     },
     {

@@ -1,47 +1,88 @@
-<div class="row">
-
+<div class="row mt-5">
+  {{#with newPokemon}}
     <div class="col-md-4 mb-2">
         {{> poke-card this}}
     </div>
-    <div class="col-md-8">
-        <h3>Detail of {{name}}</h3>
-        <div id='passingData' class="hidden" data-pokeid="{{api_id}}"></div>
+    <div class="col-md-8 px-5">
+        <h2>Detail of {{cap name}}</h2>
+        
         <div id="detail-stats">
+            <h3>Details:</h3>
+            <ul>
+                <li><span class="h6">In Original Series:</span> {{is_default}}</li>
+                <li><span class="h6">Height:</span> {{height}}</li>
+                <li><span class="h6">Weight</span>: {{weight}}</li>
+                <li><span class="h6">Types</span>: {{#each types}} {{cap this}}, {{/each}}</li>
+                <li><span class="h6">Ablilities</span>: {{#each abilities}} {{cap this}}, {{/each}}</li>
+                <li><span class="h6">Species</span>: {{cap species}}</li>
+            </ul>
 
+            <h3>Moves:</h3>
+            {{#each moves as |move|}}
+            <button type="button" class="btn btn-primary position-relative m-1 move-btn" data-moveurl="{{move.url}}"
+                data-bs-toggle="modal" data-bs-target="#move-detail-modal">
+                {{cap move.name}}
+                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                    {{move.lv}}
+                    <span class="visually-hidden">move level</span>
+                </span>
+            </button>
+
+            {{/each}}
         </div>
+
     </div>
+  {{/with}}
 </div>
+
+<div class="modal fade" id="move-detail-modal" tabindex="-1" aria-labelledby="MoveDetailModal" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title" id="modal-label">Move Detail</h3>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Stuff
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
 
 
 <script>
     
+    
+    document.querySelector('#detail-stats').addEventListener('click',async (e)=>{
+        const el = e.target;
+        if(el.matches('.move-btn')){
+            const url = el.dataset.moveurl
+            const data = await fetch(url).then(d=>d.json());
+            console.log(data)
 
-    (async () => {
-        const pokeid = document.querySelector('#passingData').dataset.pokeid;
-      
-        const pokedata = await fetch(`https://pokeapi.co/api/v2/pokemon/${(pokeid)}`).then(data=>data.json())
-        console.log(pokedata.moves)
-
-        const moves_arr = [];
-        for(let move of pokedata.moves){
-            const accurate = await fetch(move.move.url).then(d=>d.json())
-           console.log(accurate)
-           moves_arr.push({
-                name: move.move.name,
-
-           })
+            document.querySelector('#modal-label').textContent = capitalize(data.name)
+            const htmlTemplate = `
+                <h5>${capitalize(data.damage_class.name)} Dmg. <i class="fa-solid fa-burst"></i></h5>
+                 <h5>${data.power} Power<i class="fa-solid fa-burst"></i></h5>
+                <p><span class='h5'>Type: </span> ${data.contest_type.name}</p>
+                <p><span class='h5'>Desc: </span> ${data.effect_entries[0].effect}</p>
+                <p><span class='h5'>Flavor: </span> ${data.flavor_text_entries[0].flavor_text}<p>
+                 <p><span class='h5'>Pokemons have this move: </span> </br>
+                  ${data.learned_by_pokemon.map(poke=>`<a class='btn btn-sm btn-light' href='/pokedetail/${poke.name}' target='_blank'>${capitalize(poke.name)}</a> `)}
+                 <p>
+                
+            `;
+            document.querySelector('.modal-body').innerHTML = htmlTemplate
         }
-        console.log(moves_arr)
-        let htmlTemplate = `
-            <h3>Moves</h3>
-            <ul>
-        
-        `;
-        for(let move of pokedata.moves){
-            htmlTemplate += `<li> <a href='${move.move.url}'>${move.move.name} ${ fetch(move.move.url).then(d=>d.json()).then(d=>d.accuracy)}</a></li>`
-        }
-        htmlTemplate += '</ul>'
-        document.querySelector('#detail-stats').innerHTML = htmlTemplate
-    })()
+    })
 
+
+    
 </script>

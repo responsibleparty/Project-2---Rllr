@@ -1,0 +1,18 @@
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-md-3">
+            <h2>Profile: {{cap renderData.username}}</h2>
+            {{#if logged_in}}
+            {{#if friendable}}
+            <button class="btn btn-primary" data-user="{{renderData.id}}"><i
+                    class="text-white fa-solid fa-user-plus"></i></button>
+            {{/if}}
+            {{/if}}
+        </div>
+         <div class="col-md-8">
+
+        {{> front-post renderData}}
+    </div>
+    </div>
+
+</div>

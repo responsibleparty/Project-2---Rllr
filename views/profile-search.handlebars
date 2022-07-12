@@ -1,0 +1,45 @@
+<div class="container">
+    <div class="row">
+        <h5>User Serach</h5>
+        <div class="col-md-6">
+            <form id="user-search-form">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" id="user-search-value" placeholder="Username"
+                        aria-label="Username" aria-describedby="search-user">
+                    <button class="btn btn-outline-secondary" type="button" id="user-search-btn">Search</button>
+                </div>
+            </form>
+        </div>
+
+        <div id="user-found" class="col-md-8">
+
+        </div>
+    </div>
+</div>
+
+
+<script>
+    document.querySelector('#user-search-btn').addEventListener('click', async (e) => {
+        e.preventDefault();
+        const username = document.querySelector('#user-search-value').value.trim()
+        if(!!username){
+            const userFound = await fetch(`/api/users/${username}`).then(d=>d.json())
+            console.log(userFound)
+             let htmlTemplate = ''
+            if(!!userFound.username){
+               htmlTemplate += `
+                <h5>We Found 
+                <a class='btn btn-primary' href='/profile/${userFound.username}'>${userFound.username}</a>
+                </h5>
+               `
+            }
+            else{
+                htmlTemplate += '<p>No user found!</p>'
+            }
+
+             document.querySelector('#user-found').innerHTML = htmlTemplate
+        }else{
+            alert('type something in the search box')
+        }
+    })
+</script>
