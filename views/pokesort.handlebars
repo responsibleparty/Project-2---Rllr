@@ -13,17 +13,11 @@
 <script>
 
     (async () => {
-        const allPoke = await fetch('/api/pokemons').then(data => data.json())
+        const allPoke = await fetch('/api/pokemons').then(data => data.json());
 
        
 
-        const showme = (e) => {
-            console.log(event.target.value)
-            let htmlTemplate = ``
-            const result= allPoke.filter(one=>one.name.(event.target.value))
-          console.log(result)
-
-        }
+       
 
          document.querySelector('#pokemon-search-value').addEventListener('change', showme);
         document.querySelector('#pokemon-search-btn').addEventListener('click', showme)
