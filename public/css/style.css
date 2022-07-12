@@ -2,7 +2,7 @@
     color: white;
 }
 
-#card {
+.poke-card {
     position: relative;
     width: 100%;
     padding: 30px 20px;
@@ -10,7 +10,7 @@
     border-radius: 10px;
 }
 
-#card img {
+.poke-card img {
     display: block;
     width: 180px;
     max-height: 200px;

@@ -1,15 +1,15 @@
-
-
-<div id="card" style="background: radial-gradient(circle at 50% 0%, {{one_theme this.types.[0]}} 36%, rgb(255, 255, 255) 36%);">
+<div class="poke-card"
+    style="background: radial-gradient(circle at 50% 0%, {{one_theme this.types.[0]}} 36%, rgb(255, 255, 255) 36%);">
     <p class="hp">
         <span>ID</span>
         {{this.id}}
     </p>
-    <img class='animate__animated animate__infinite animate__slower animate__pulse' src="/images/pokemons/{{this.api_id}}.svg">
+    <img class='animate__animated animate__infinite animate__slower animate__pulse'
+        src="/images/pokemons/{{this.api_id}}.svg">
     <h2 class="poke-name">{{cap this.name}}</h2>
     <div class="types">
         {{#each this.types}}
-            <span style="background-color:{{one_theme this}};">{{cap this}}</span>
+        <span style="background-color:{{one_theme this}};">{{cap this}}</span>
         {{/each}}
     </div>
     <div class="stats">
@@ -25,18 +25,18 @@
             <h3>{{this.stat_def}} <i class="fa-solid fa-shield"></i></h3>
             <p>DEF</p>
         </div>
-        
+
     </div>
     <div class="stats">
         <div>
             <h3>{{this.stat_speed}} <i class="fa-solid fa-wind"></i></h3>
             <p>SPD</p>
         </div>
-         <div>
+        <div>
             <h3>{{this.stat_special_att}} <i class="fa-solid fa-skull-crossbones"></i></h3>
             <p>Sp. ATT</p>
         </div>
-         <div>
+        <div>
             <h3>{{this.stat_special_def}} <i class="fa-solid fa-shield-virus"></i></h3>
             <p>Sp. DEF</p>
         </div>
@@ -44,15 +44,14 @@
     <div class="abilities">
         <p> <span class="h6">Abilities: </span>
             {{#each this.abilities as |abi|}}
-                <span class="pill">
-                    • {{cap abi}}
-        </span>
-        {{/each}}
+            <span class="pill">
+                • {{cap abi}}
+            </span>
+            {{/each}}
         </p>
-        
+
     </div>
-   
-   
+
 </div>
 
 

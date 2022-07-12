@@ -1,26 +1,47 @@
 <h2>Hi Hai</h2>
 
-<form id="poke-search-form">
+<div id="poke-search-form">
     <div class="input-group mb-3">
-        <input type="text" class="form-control" id="pokemon-search-value" placeholder="pokemon name"
+        <input type="text" class="form-control" id="pokemon-search-value" placeholder="Pokemon name start with"
             aria-label="pokemons" aria-describedby="search-user">
         <button class="btn btn-outline-secondary" type="button" id="pokemon-search-btn">Search</button>
     </div>
-</form>
+</div>
 
 
-<div id="result"></div>
+<div id="result">
+    <h4 class="result-found"></h4>
+    <div class="display"></div>
+</div>
+
+
 <script>
 
     (async () => {
         const allPoke = await fetch('/api/pokemons').then(data => data.json());
+    
+    const buildcard = (poke,index) => {
+        return `
+            <li>${capitalize(poke.name)}</li>
+        `
+    }
 
-       
+       const showme = async (e)=>{
+        e.preventDefault()
+        console.log(e.target.value)
+        let htmlTemplate =''
+        const filter = await allPoke.filter(poke=>poke.name.startsWith(e.target.value)).map((poke,index)=>{
+            htmlTemplate += buildcard(poke,index)
+        })
+        
+        document.querySelector('#result .result-found').textContent = `${filter.length} result(s) found`;
+        document.querySelector('#result .display').innerHTML = await htmlTemplate
+       }
 
        
 
          document.querySelector('#pokemon-search-value').addEventListener('change', showme);
-        document.querySelector('#pokemon-search-btn').addEventListener('click', showme)
+        document.querySelector('#poke-search-form').addEventListener('submit', showme)
     })()
 
 
