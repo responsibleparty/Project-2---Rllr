@@ -50,4 +50,31 @@ router.get('/:query', async (req, res) => {
     }
 })
 
+router.get('/', async (req,res)=>{
+    try {
+        const pokeData = await Pokedex.findAll();
+        const pokedex = pokeData.map((p) => {
+            const pokemon = p.get({
+                plain: true
+            })
+         
+            const newPokemon = {
+                ...pokemon,
+                abilities: JSON.parse(pokemon.abilities),
+                types: JSON.parse(pokemon.types),
+                
+            }
+            return newPokemon
+        })
+
+        res.status(200).json(pokedex)
+        // res.render('pokesort', {
+        //     pokedex,
+        //     logged_in:req.session.logged_in
+        // })
+    } catch (error) {
+        res.status(500).json(error)
+    }
+})
+
 module.exports = router;
