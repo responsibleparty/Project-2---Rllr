@@ -34,6 +34,7 @@ const buildMyCard = (poke, index) => {
     
     <div class="poke-card"
     style="background: radial-gradient(circle at 50% 0%, ${one_theme(poke.types[0])} 36%, rgb(255, 255, 255) 36%);">
+    <p class='handle'><i class="fa-2x fa-solid fa-grip"></i></p>
     <p class="hp">
         <span>ID</span>
         ${poke.id}
