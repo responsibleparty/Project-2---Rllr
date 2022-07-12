@@ -33,7 +33,7 @@ router.post("/login", async (req, res) => {
                 username: req.body.lg_username
             },
         });
-        console.log("got request");
+     
         if (!userData) {
             res.status(400).json({
                 message: "NO user found"
@@ -59,7 +59,7 @@ router.post("/login", async (req, res) => {
             });
         });
     } catch (error) {
-        console.log("here");
+       
         res.status(500).json(error);
     }
 });
@@ -73,5 +73,26 @@ router.post('/logout', (req, res) => {
         res.status(404).end();
     }
 });
+
+// get user
+router.get('/:username', async (req,res)=>{
+    try {
+        const userData = await User.findOne({
+            where: {
+                username: req.params.username
+            },
+            attributes:{exclude:['password']}
+        });
+        if (!userData) {
+            res.status(400).json({
+                message: "NO user found"
+            });
+            return;
+        }
+        res.status(200).json(userData)
+    } catch (error) {
+        res.status(500).json(error)
+    }
+})
 
 module.exports = router;
