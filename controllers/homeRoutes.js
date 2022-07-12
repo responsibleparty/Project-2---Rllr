@@ -96,7 +96,7 @@ router.get("/pokedex", async (req, res) => {
             const pokemon = p.get({
                 plain: true
             })
-         
+
             const newPokemon = {
                 ...pokemon,
                 abilities: JSON.parse(pokemon.abilities),
@@ -109,7 +109,7 @@ router.get("/pokedex", async (req, res) => {
         // res.status(200).json(pokedex)
         res.render('pokedex', {
             pokedex,
-            logged_in:req.session.logged_in
+            logged_in: req.session.logged_in
         })
     } catch (error) {
         res.status(500).json(error);
@@ -146,13 +146,13 @@ router.get('/pokeown', async (req, res) => {
         // res.status(200).json(pokedex)
         res.render('pokeown', {
             pokedex,
-            logged_in:req.session.logged_in
+            logged_in: req.session.logged_in
         })
     } catch (error) {
-        res.status(500), json(error)
+        res.status(500).json(error)
     }
 })
-router.get('/pokedetail/', (req,res)=>{
+router.get('/pokedetail/', (req, res) => {
     res.redirect('/pokedetail/bulbasaur')
 })
 
@@ -171,7 +171,9 @@ router.get('/pokedetail/:query', async (req, res) => {
         })
         if (!pokedex) {
             // res.status(404).json('No pokemon associate with this id')
-            res.render('nofound', {message: `No Pokemon found with query: ${req.params.query}`})
+            res.render('nofound', {
+                message: `No Pokemon found with query: ${req.params.query}`
+            })
             return;
             // res.replace('/')
         }
@@ -179,7 +181,7 @@ router.get('/pokedetail/:query', async (req, res) => {
             plain: true
         })
 
-       
+
 
         const moves_arr = JSON.parse(pokemon.moves)
         const moves_url = JSON.parse(pokemon.moves_url);
@@ -192,54 +194,67 @@ router.get('/pokedetail/:query', async (req, res) => {
                 url: moves_url[index]
             }
         })
-        
+
 
 
         const newPokemon = {
             ...pokemon,
-            
+
             abilities: JSON.parse(pokemon.abilities),
             past_types: JSON.parse(pokemon.past_types),
-            types:JSON.parse(pokemon.types),
+            types: JSON.parse(pokemon.types),
             moves: movesObj
         }
         delete newPokemon.moves_url;
 
-        
+
         // res.status(200).json(newPokemon)
 
-        res.render('pokedetail', {newPokemon,  logged_in:req.session.logged_in})
+        res.render('pokedetail', {
+            newPokemon,
+            logged_in: req.session.logged_in
+        })
     } catch (error) {
         res.status(500).json(error)
         // res.render('nofound',{message:'Pokemon is Not found'})
         // return
-       
+
     }
 })
 // search user
-router.get('/profile/',(req,res)=>{
+router.get('/profile/', (req, res) => {
     res.render('profile-search')
 })
 // user profile display
-router.get('/profile/:username', async (req,res)=>{
+router.get('/profile/:username', async (req, res) => {
     try {
         const userData = await User.findOne({
             where: {
                 username: req.params.username
             },
-            attributes:{exclude:['password']},
-            include:[{
+            attributes: {
+                exclude: ['password']
+            },
+            include: [{
                 model: Post,
-                include:{model:Comment, include:{model:User}}
+                include: {
+                    model: Comment,
+                    include: {
+                        model: User
+                    }
+                }
             }]
 
         });
-        const renderData = userData.get({plain:true})
-  
-        
+        const renderData = userData.get({
+            plain: true
+        })
+
+
         // res.json(renderData)
-        res.render('profile-detail',{renderData,
-            friendable: req.session.user_id!=renderData.id,
+        res.render('profile-detail', {
+            renderData,
+            friendable: req.session.user_id != renderData.id,
             logged_in: req.session.logged_in,
             user_id: req.session.user_id,
             currentUser: req.session.currentUser,
@@ -249,8 +264,5 @@ router.get('/profile/:username', async (req,res)=>{
     }
 })
 
-router.get('/pokesort', async (req,res)=>{
-   res.render('pokesort')
-})
 
 module.exports = router;

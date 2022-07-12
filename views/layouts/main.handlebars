@@ -12,12 +12,17 @@
     href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
   />
 <link rel="stylesheet" href="/css/style.css">
+    <link href="http://fonts.cdnfonts.com/css/pokemon-solid" rel="stylesheet">
 <script src="/js/frontendhelper.js"></script>
 </head>
 
 <body>
    
   {{> navbar}}
+  <div class="container jumbotron">
+  <img id="pageBanner" src="./images/PokemonBanner.jpeg" alt="Pikachu">
+  </div>
+
    <div class="container-lg">
      {{{body}}}
    </div>
@@ -32,6 +37,7 @@
 {{#if logged_in}}
   <script src="/js/logout.js"></script>
 {{/if}}
+
 
 </body>
 
