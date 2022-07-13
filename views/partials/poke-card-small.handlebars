@@ -4,8 +4,10 @@
         <span>ID</span>
         {{this.id}}
     </p>
-    <img style="width:100%;height:auto;" class='animate__animated animate__infinite animate__slower animate__pulse'
+    <a href="/pokemons/{{this.name}}">
+        <img style="width:100%;height:auto;" class='animate__animated animate__infinite animate__slower animate__pulse'
         src="/images/pokemons/{{this.api_id}}.svg">
+    </a>
     <h4 class="poke-name">{{cap this.name}}</h4>
 
 </div>
