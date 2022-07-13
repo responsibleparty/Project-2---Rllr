@@ -7,6 +7,7 @@ const {
 const {
     sequelize
 } = require('../../models/Pokedex');
+const { Ownership, User } = require('../../models');
 // GET POST via id
 router.get('/:query', async (req, res) => {
     try {
@@ -71,6 +72,47 @@ router.get('/', async (req,res)=>{
         //     pokedex,
         //     logged_in:req.session.logged_in
         // })
+    } catch (error) {
+        res.status(500).json(error)
+    }
+})
+
+const getRandomPokeID = () =>{
+    return Math.floor(Math.random()*151)+1
+} 
+
+router.post('/game/play',withAuth, async (req,res)=>{
+    try {
+        const currentUser = await User.findByPk(req.session.user_id,{
+            attributes:{exclude:['password']},
+            include:[
+            {association:'collection', attributes:['id','name']}
+        ]
+    
+    })
+
+        const own = currentUser.collection.map(poke=>poke.id)
+        let randomNumb = getRandomPokeID()
+        while(own.includes(randomNumb)){
+            randomNumb = getRandomPokeID()
+        }
+       const addCardToUser = await Ownership.create({
+            user_id: req.session.user_id,
+            pokemon_id: randomNumb,
+       })
+        // res.status(200).json(randomNumb)
+        res.status(200).json({currentUser,randomNumb})
+    } catch (error) {
+        res.status(500).json(error)
+    }
+})
+
+
+
+router.get('/game/own', async(req,res)=>{
+    try {
+        const userData = await Ownership.findAll();
+        res.status(200).json(userData);
     } catch (error) {
         res.status(500).json(error)
     }

@@ -8,8 +8,8 @@
                     class="text-white fa-solid fa-user-plus" data-user="{{renderData.id}}"></i></button>
             {{/if}}
            {{/if}}
-
-
+          
+          
             <div>
                 <h4 class="text-muted">Following </h4>
                 {{#each renderData.follow as |follow|}}
@@ -26,8 +26,16 @@
 
         </div>
         <div class="col-md-8">
-
-            {{> front-post renderData}}
+           
+            <div class="row">
+                {{> front-post renderData}}
+            </div>
+            <div class="row">
+                <h4>Card Collection</h4>
+            {{#each renderData.collection as |card|}}
+                <div class="col-md-4 mb-3">{{>poke-card-small card }}</div>      
+            {{/each}}
+            </div>
         </div>
     </div>
 

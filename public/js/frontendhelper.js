@@ -108,3 +108,43 @@ const buildMyCard = (poke, index) => {
 
     return templateHtml;
 };
+
+
+const buildSimpleCard = (poke, index) => {
+    let templateHtml = `
+    
+    <div class="poke-card"
+    style="background: radial-gradient(circle at 50% 0%, ${one_theme(
+        poke.types[0]
+    )} 36%, rgb(255, 255, 255) 36%);">
+    <p class='handle'><i class="fa-2x fa-solid fa-grip"></i></p>
+    <p class="hp">
+        <span>ID</span>
+        ${poke.id}
+        
+    </p>
+    <a href='/pokedetail/${poke.api_id}' target='_blank'>
+    <img class='animate__animated animate__infinite animate__slower animate__pulse' src="/images/pokemons/${
+        poke.api_id
+    }.svg">
+    </a>
+    
+    <h2 class="poke-name">${capitalize(poke.name)}</h2>
+    <div class="types">
+       
+        ${poke.types.map(
+            (type) =>
+                `<span style="background-color:${one_theme(
+                    type
+                )};">${capitalize(type)}</span>`
+        )}
+    </div>
+
+</div>
+    
+    
+    
+    `;
+
+    return templateHtml;
+};

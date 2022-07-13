@@ -66,7 +66,9 @@ router.get("/dashboard", withAuth, async (req, res) => {
         const userData = await User.findByPk(req.session.user_id, {
             include: [{
                 model: Post
-            }],
+            },{association:'follow', attributes:{exclude:['password']}},
+            {association:'followed', attributes:{exclude:['password']}},
+            {association:'collection', attributes:{exclude:['password']}}],
             attributes: {
                 exclude: ["password"]
             },
@@ -80,6 +82,7 @@ router.get("/dashboard", withAuth, async (req, res) => {
         const user = userData.get({
             plain: true
         });
+        // res.json(user)
         res.render("dashboard", {
             ...user,
             logged_in: req.session.logged_in,
@@ -118,9 +121,19 @@ router.get("/pokedex", async (req, res) => {
     }
 });
 
-router.get('/pokeown', async (req, res) => {
+router.get('/pokeown', withAuth, async (req, res) => {
     try {
-        const own = [2, 5, 6];
+
+
+        const currentUser = await User.findByPk(req.session.user_id,{
+            attributes:{exclude:['password']},
+            include:[
+            {association:'collection', attributes:['id','name']}
+        ]
+    
+    })
+
+        const own = currentUser.collection.map(poke=>poke.id)
         const pokeData = await Pokedex.findAll({
             where: {
                 api_id: {
@@ -132,10 +145,7 @@ router.get('/pokeown', async (req, res) => {
             const pokemon = p.get({
                 plain: true
             })
-            // const moves_arr = JSON.parse(pokemon.moves).map((move)=>{
-            //     const oneRow = move.split('**')
-            //     return {name:oneRow[0],lv:oneRow[1],from:oneRow[2]}
-            // })
+
             const newPokemon = {
                 ...pokemon,
                 abilities: JSON.parse(pokemon.abilities),
@@ -253,7 +263,8 @@ router.get('/profile/:username', async (req, res) => {
                     }
                 }
             },{association:'follow', attributes:{exclude:['password']}},
-            {association:'followed', attributes:{exclude:['password']}}]
+            {association:'followed', attributes:{exclude:['password']}},
+            {association:'collection', attributes:{exclude:['password']}}]
 
         });
         const renderData = userData.get({
