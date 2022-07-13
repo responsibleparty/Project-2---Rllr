@@ -223,7 +223,9 @@ router.get('/pokedetail/:query', async (req, res) => {
 })
 // search user
 router.get('/profile/', (req, res) => {
-    res.render('profile-search')
+    res.render('profile-search', {
+        logged_in: req.session.logged_in
+    })
 })
 // user profile display
 router.get('/profile/:username', async (req, res) => {
