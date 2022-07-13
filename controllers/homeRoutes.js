@@ -225,6 +225,7 @@ router.get('/pokedetail/:query', async (req, res) => {
 })
 // search user
 router.get('/profile/', (req, res) => {
+
     try {
         res.render('profile-search',{
             logged_in:req.session.logged_in
@@ -233,6 +234,7 @@ router.get('/profile/', (req, res) => {
         res.status(500).json(error)
     }
     
+
 })
 // user profile display
 router.get('/profile/:username', async (req, res) => {
@@ -278,6 +280,7 @@ router.get('/profile/:username', async (req, res) => {
     }
 })
 
+
 router.get('/pokesort', async (req, res) => {
     try {
        
@@ -288,5 +291,6 @@ router.get('/pokesort', async (req, res) => {
         res.status(500).json(error)
     }
 })
+
 
 module.exports = router;

@@ -1,47 +1,41 @@
-# Project-2---Rllr
-Project 2 - Rllr
-<<<<<<< HEAD
-Hi
-=======
-
-Rllr
+# Project-2---RllrDex
+Developers: [Cecilia](https://github.com/responsibleparty), [Hai](https://github.com/caubenondo), [Marshall](https://github.com/marshall-rust), [Patrick](https://github.com/monacoglynn), [Richmond](https://github.com/richmonddz)
 
 
-https://docs.pokemontcg.io/
-https://documenter.getpostman.com/view/12403653/TVK8cLiK
 
-possible pokemon API to use.
+##[RllrDex](https://project2-rllr.herokuapp.com/)
 
 
-Future development
-Possible online card battles.
 
-##Node packages
-bcrypt
-connect-session-sequelize
-dotenv
-express
-express-handlebars
-express-session
-mysql2
-sequelize
-nodemon
-pokedex-promise-v2
-
-
-Developers: Patrick, Cecilia, Marshall, Hai, Richmond
-
-Project Title: Rllr Decks (ローラーデッキ)
+# Description
 
 Project Description: Ever wondered what would happen when Pokemon and social media evolve into one? Well  Rōrādekki is your answer! Post, update and collect Pokemon and compare them with your friends! Keep an eye out for those legendaries…. 👀
 
-User Story: As a user I want to collect as many Pokemon as I can and get ahead of my rivals. The more I interact with the website the faster my Pokedex will be completed and the sooner ill become a Pokemon master. 
+## Concept
+RllrDex is an application where users can interact and talk about all things Pokemon! Users can customize their own PokeTea
 
-APIs: Pokédex-promise-v2
+## User Story
+As a Pokemon trainer, I want to meet like minded trainers to discuss new pokemons. RllrDex is perfect for me!
 
-Team Breakdown so-far: 
-1.
-2.
-3.
-4.
->>>>>>> refs/remotes/origin/main
+#Process
+##Technologies & Packages Used
+- bcrypt
+- connect-session-sequelize
+- dotenv
+- express
+- express-handlebars
+- express-session
+- mysql2
+- sequelize
+- nodemon
+- pokedex-promise-v2
+
+
+##Future Development
+- Add trading features
+- Enhanced UI
+- Battle online
+- Instant message with friends 
+
+![splash-page](public/images/splash.png)
+
