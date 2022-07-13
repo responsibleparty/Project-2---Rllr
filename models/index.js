@@ -1,6 +1,8 @@
 const Post = require("./Post");
 const User = require("./User");
 const Comment = require('./Comment');
+const Following = require('./Following')
+
 User.hasMany(Post,{
     foreignKey: 'user_id',
     onDelete: 'CASCADE'
@@ -16,12 +18,29 @@ User.hasMany(Comment,{
 Comment.belongsTo(User,{
     foreignKey:'user_id'
 })
+
 Post.hasMany(Comment,{
     foreignKey:'post_id',
     onDelete:'CASCADE'
 })
+
 Comment.belongsTo(Post,{
     foreignKey:'post_id',
 })
 
-module.exports = {User,Post}
+User.belongsToMany(User,{
+    through: Following,
+    foreignKey:'current_id',
+    otherKey:'followed_id',
+    as: 'follow'
+})
+
+User.belongsToMany(User,
+    {
+        through: Following,
+        foreignKey:'followed_id',
+        otherKey:'current_id',
+        as: 'followed'
+    })
+
+module.exports = {User,Post,Comment}

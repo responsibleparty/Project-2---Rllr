@@ -54,7 +54,9 @@ router.get("/login", (req, res) => {
     if (req.session.logged_in) {
         res.redirect("/");
     } else {
-        res.render("login");
+        res.render("login",{
+            logged_in:req.session.logged_in
+        });
     }
 });
 
@@ -223,7 +225,14 @@ router.get('/pokedetail/:query', async (req, res) => {
 })
 // search user
 router.get('/profile/', (req, res) => {
-    res.render('profile-search')
+    try {
+        res.render('profile-search',{
+            logged_in:req.session.logged_in
+        })
+    } catch (error) {
+        res.status(500).json(error)
+    }
+    
 })
 // user profile display
 router.get('/profile/:username', async (req, res) => {
@@ -243,18 +252,23 @@ router.get('/profile/:username', async (req, res) => {
                         model: User
                     }
                 }
-            }]
+            },{association:'follow', attributes:{exclude:['password']}},
+            {association:'followed', attributes:{exclude:['password']}}]
 
         });
         const renderData = userData.get({
             plain: true
         })
 
-
+        let notFriend = !renderData.followed.map(follower=>follower.id).includes(req.session.user_id)
+        if(renderData.id == req.session.user_id){
+            notFriend = false
+        }
         // res.json(renderData)
+        // res.json({frien: notFriend})
         res.render('profile-detail', {
             renderData,
-            friendable: req.session.user_id != renderData.id,
+            friendable: notFriend,
             logged_in: req.session.logged_in,
             user_id: req.session.user_id,
             currentUser: req.session.currentUser,
@@ -266,27 +280,10 @@ router.get('/profile/:username', async (req, res) => {
 
 router.get('/pokesort', async (req, res) => {
     try {
-        // const pokeData = await Pokedex.findAll();
-        // const pokedex = pokeData.map((p) => {
-        //     const pokemon = p.get({
-        //         plain: true
-        //     })
-
-        //     const newPokemon = {
-        //         ...pokemon,
-        //         abilities: JSON.parse(pokemon.abilities),
-        //         types: JSON.parse(pokemon.types),
-        //         // moves:moves_arr
-        //     }
-        //     return newPokemon
-        // })
-
-        // res.status(200).json(pokedex)
-        // // res.render('pokesort', {
-        // //     pokedex,
-        // //     logged_in:req.session.logged_in
-        // // })
-        res.render('pokesort')
+       
+        res.render('pokesort',{
+            logged_in:req.session.logged_in
+        })
     } catch (error) {
         res.status(500).json(error)
     }

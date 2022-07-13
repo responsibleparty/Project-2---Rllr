@@ -10,7 +10,7 @@
                 <a class='nav-link' href="/pokeown">Own</a>
             </li>
              <li class="nav-item">
-                <a class='nav-link' href="/pokesort">Sort</a>
+                <a class='nav-link' href="/pokesort"><i class="fa-solid fa-people-group"></i></a>
             </li>
             <li class="nav-item">
                 <a class='nav-link' href="/pokedetail"><i class="text-white fa-solid fa-paw"></i></a>
@@ -23,14 +23,14 @@
                 <a class="nav-link" href="/dashboard"><i class="text-white fa-solid fa-user-pen"></i></a>
             </li>
             <li class="nav-item">
-                <button class="nav-link" id="logout-btn"><i class="text-white fa-solid fa-arrow-right-from-bracket"></i></button>
+                <button class="nav-link" id="logout-btn"><i class="text-warning fa-solid fa-toggle-on"></i></button>
             </li>
 
             {{/if}}
             
             {{#unless logged_in}}
             <li class="nav-item">
-                <a class="nav-link" href="/login"><i class="text-white fa-solid fa-arrow-right-to-bracket"></i></a>
+                <a class="nav-link" href="/login"><i class="text-light fa-solid fa-toggle-on"></i></a>
             </li>
             {{/unless}}
             
