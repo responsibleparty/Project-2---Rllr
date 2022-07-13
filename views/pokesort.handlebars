@@ -6,45 +6,93 @@
     </div>
 </div>
 
+<div class="row mb-5">
+     <div class="col-lg-6">
+        <h3>Search pokemon by name</h3>
+        <div id="poke-search-form">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" id="pokemon-search-value" placeholder="Pokemon name start with"
+                    aria-label="pokemons" aria-describedby="search-user">
+                <button class="btn btn-outline-secondary" type="button" id="pokemon-search-btn">Search</button>
+            </div>
+        </div>
+        <div id="result">
+            <h4 class="result-found"></h4>
+            <div id="display"></div>
+        </div>
 
-<div id="result">
-    <h4 class="result-found"></h4>
-    <div id="display"></div>
+    </div>
+    <div class="col-lg-6 mb-3">
+        <h3>Squad:</h3>
+        <div id="card-dex" class="row bg-light" style="min-height:400px; height:auto">
+            
+        </div>
+        <div class="d-grid gap-2 col-6 mx-auto">
+                <button class="btn btn-info save-cardid" >Save your squad</button>
+        </div>
+        <div class="toastme">
+
+        </div>
+    </div>
+
+
+    
 </div>
+
+
+
+
 
 <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
 
 <script>
-   
+
 
 
     (async () => {
         const allPoke = await fetch('/api/pokemons').then(data => data.json());
-    
-   
 
-       const showme = async (e)=>{
-        e.preventDefault()
-        console.log(e.target.value)
-        let htmlTemplate ="<div class='row'>"
-        const filter = await allPoke.filter(poke=>poke.name.startsWith(e.target.value)).map((poke,index)=>{
-            htmlTemplate += "<div class='col-md-4 p-2'>" + buildMyCard(poke,index) +"</div>";
-        })
-        htmlTemplate += "</div>"
-        document.querySelector('#result .result-found').textContent = `${filter.length} result(s) found`;
-        document.querySelector('#result #display').innerHTML = await htmlTemplate
+        const cardDex = document.querySelector('#card-dex')
+        new Sortable(cardDex, { group: 'dex',swap: true, 
+	swapClass: 'highlight', })
 
-         const el = document.querySelector('#display .row');
-        const sortable = new Sortable.create(el,{handle:'.handle',animation:150});
-       }
+        const showme = async (e) => {
+            e.preventDefault()
+            console.log(e.target.value)
+            let htmlTemplate = "<div class='row'>"
+            const filter = await allPoke.filter(poke => poke.name.startsWith(e.target.value)).map((poke, index) => {
+                htmlTemplate += `<div class='col-md-6 p-2' data-cardname='${poke.name}'>` + buildMyCard(poke, index) + "</div>";
+            })
+            htmlTemplate += "</div>"
+            document.querySelector('#result .result-found').textContent = `${filter.length} result(s) found`;
+            document.querySelector('#result #display').innerHTML = await htmlTemplate
 
-       
+            const el = document.querySelector('#display .row');
+            const sortable = new Sortable.create(el, { handle: '.handle', animation: 150, group: 'dex' });
+        }
 
-         document.querySelector('#pokemon-search-value').addEventListener('change', showme);
+
+
+        document.querySelector('#pokemon-search-value').addEventListener('change', showme);
         document.querySelector('#poke-search-form').addEventListener('submit', showme)
     })()
 
+    document.querySelector('.save-cardid').addEventListener('click',(e)=>{
+        const rowContainer = document.querySelector('#card-dex')
+        
+        {{!-- rowContainer.children.map(child=>cardArr.push(child.dataset.cardid)) --}}
+        const childrenArr = Array.from(new Set( Array.from(rowContainer.children).map(child=>child.dataset.cardname)));
+        
+        if(childrenArr.length>0){
+            console.log(childrenArr)
 
+        document.querySelector('.toastme').innerHTML = `
+            <p>Got: ${childrenArr.map(child=>child+', ')}</p>    
+        `
+           
+        }
+       
+    })
 
 </script>
 

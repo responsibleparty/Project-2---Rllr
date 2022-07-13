@@ -94,5 +94,23 @@ router.get('/:username', async (req,res)=>{
         res.status(500).json(error)
     }
 })
+router.get('/', async (req,res)=>{
+    try {
+        const userData = await User.findAll(
+            {
+                attributes:{exclude:['password']},
+                include:[
+                {association:'follow', attributes:{exclude:['password']}},
+                {association:'followed', attributes:{exclude:['password']}}
+            ]
+        
+        }
+        )
+
+        res.status(200).json(userData)
+    } catch (error) {
+        res.status(500).json(error)
+    }
+})
 
 module.exports = router;
