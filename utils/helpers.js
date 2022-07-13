@@ -41,6 +41,9 @@ module.exports = {
     },
     cap:(str)=>{
         return str[0].toUpperCase()+str.slice(1);
+    },
+    notAFan: (followers, currentUserID)=>{
+        return followers.map(follower=>follower.id).includes(currentUserID)
     }
    
 }

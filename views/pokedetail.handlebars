@@ -1,10 +1,39 @@
+<div class="p-5 mb-4 bg-light rounded-3" style="background:url('/images/pokemons/{{newPokemon.id}}.svg') no-repeat center;">
+    <div class="container-fluid py-5" >
+        <h1 class="display-5 fw-bold">Detail of {{cap newPokemon.name}}</h1>
+    </div>
+    <div class="row mb-5">
+     <div class="col-lg-6">
+        <h5>Not the one you looking for?</h5>
+        <div id="poke-search-form">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" id="pokemon-search-value" placeholder="Pokemon name start with"
+                    aria-label="pokemons" aria-describedby="search-user">
+                <button class="btn btn-outline-secondary" type="button" id="pokemon-search-btn">Search</button>
+            </div>
+        </div>
+       
+
+    </div>
+    <div class="col-lg-12">
+       <div id="result">
+            <h4 class="result-found"></h4>
+            <div id="display"></div>
+        </div>
+    </div>
+</div>
+</div>
+
+
+
+
 <div class="row mt-5">
   {{#with newPokemon}}
     <div class="col-md-4 mb-2">
         {{> poke-card this}}
     </div>
     <div class="col-md-8 px-5">
-        <h2>Detail of {{cap name}}</h2>
+        
         
         <div id="detail-stats">
             <h3>Details:</h3>
@@ -59,6 +88,33 @@
 
 <script>
     
+     (async () => {
+        const allPoke = await fetch('/api/pokemons').then(data => data.json());
+
+    
+
+        const showme = async (e) => {
+            e.preventDefault()
+            console.log(e.target.value)
+            let htmlTemplate = "<div class='row'>"
+            const filter = await allPoke.filter(poke => poke.name.startsWith(e.target.value)).map((poke, index) => {
+                htmlTemplate += `<div class='col-md-4 p-2' data-cardname='${poke.name}'>` + buildMyCard(poke, index) + "</div>";
+            })
+            htmlTemplate += "</div>"
+            document.querySelector('#result .result-found').textContent = `${filter.length} result(s) found`;
+            document.querySelector('#result #display').innerHTML = await htmlTemplate
+
+            const el = document.querySelector('#display .row');
+            const sortable = new Sortable.create(el, { handle: '.handle', animation: 150, group: 'dex' });
+        }
+
+
+
+        document.querySelector('#pokemon-search-value').addEventListener('change', showme);
+        document.querySelector('#poke-search-form').addEventListener('submit', showme)
+    })()
+
+
     
     document.querySelector('#detail-stats').addEventListener('click',async (e)=>{
         const el = e.target;

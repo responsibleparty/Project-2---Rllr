@@ -2,17 +2,58 @@
     <div class="row">
         <div class="col-md-3">
             <h2>Profile: {{cap renderData.username}}</h2>
-            {{#if logged_in}}
+           {{#if logged_in}}
             {{#if friendable}}
-            <button class="btn btn-primary" data-user="{{renderData.id}}"><i
-                    class="text-white fa-solid fa-user-plus"></i></button>
+            <button class="btn btn-primary follow-btn" data-user="{{renderData.id}}" onclick="follow({{renderData.id}})"><i
+                    class="text-white fa-solid fa-user-plus" data-user="{{renderData.id}}"></i></button>
             {{/if}}
-            {{/if}}
-        </div>
-         <div class="col-md-8">
+           {{/if}}
 
-        {{> front-post renderData}}
-    </div>
+
+            <div>
+                <h4 class="text-muted">Following </h4>
+                {{#each renderData.follow as |follow|}}
+                <a href="/profile/{{follow.username}}" class="btn btn-sm btn-light m-1">{{follow.username}}</a>
+                {{/each}}
+            </div>
+
+            <div>
+                <h4 class="text-muted">Followed by </h4>
+                {{#each renderData.followed as |followed|}}
+                <a href="/profile/{{followed.username}}" class="btn btn-sm btn-light m-1">{{followed.username}}</a>
+                {{/each}}
+            </div>
+
+        </div>
+        <div class="col-md-8">
+
+            {{> front-post renderData}}
+        </div>
     </div>
 
 </div>
+
+
+<script>
+   const follow =  async (e) => {
+        const followingUser = e
+        console.log(followingUser)
+
+        const response = await fetch('/api/network', {
+            method: 'POST',
+            body: JSON.stringify({
+                followed_id:followingUser,
+            }),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+        if(response.ok){
+            document.location.reload()
+        }else{
+            alert('Ugh Oh... Error')
+        }
+
+    }
+
+</script>

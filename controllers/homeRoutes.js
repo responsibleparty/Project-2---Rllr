@@ -54,7 +54,9 @@ router.get("/login", (req, res) => {
     if (req.session.logged_in) {
         res.redirect("/");
     } else {
-        res.render("login");
+        res.render("login",{
+            logged_in:req.session.logged_in
+        });
     }
 });
 
@@ -223,9 +225,14 @@ router.get('/pokedetail/:query', async (req, res) => {
 })
 // search user
 router.get('/profile/', (req, res) => {
-    res.render('profile-search', {
-        logged_in: req.session.logged_in
-    })
+    try {
+        res.render('profile-search',{
+            logged_in:req.session.logged_in
+        })
+    } catch (error) {
+        res.status(500).json(error)
+    }
+    
 })
 // user profile display
 router.get('/profile/:username', async (req, res) => {
@@ -245,18 +252,23 @@ router.get('/profile/:username', async (req, res) => {
                         model: User
                     }
                 }
-            }]
+            },{association:'follow', attributes:{exclude:['password']}},
+            {association:'followed', attributes:{exclude:['password']}}]
 
         });
         const renderData = userData.get({
             plain: true
         })
 
-
+        let notFriend = !renderData.followed.map(follower=>follower.id).includes(req.session.user_id)
+        if(renderData.id == req.session.user_id){
+            notFriend = false
+        }
         // res.json(renderData)
+        // res.json({frien: notFriend})
         res.render('profile-detail', {
             renderData,
-            friendable: req.session.user_id != renderData.id,
+            friendable: notFriend,
             logged_in: req.session.logged_in,
             user_id: req.session.user_id,
             currentUser: req.session.currentUser,
@@ -266,6 +278,15 @@ router.get('/profile/:username', async (req, res) => {
     }
 })
 
-
+router.get('/pokesort', async (req, res) => {
+    try {
+       
+        res.render('pokesort',{
+            logged_in:req.session.logged_in
+        })
+    } catch (error) {
+        res.status(500).json(error)
+    }
+})
 
 module.exports = router;
