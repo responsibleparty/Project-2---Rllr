@@ -1,7 +1,10 @@
 const Post = require("./Post");
 const User = require("./User");
 const Comment = require('./Comment');
-const Following = require('./Following')
+const Following = require('./Following');
+const Pokemon = require("./Pokemon");
+const Ownership = require("./Ownership");
+const Pokedex = require("./Pokedex");
 
 User.hasMany(Post,{
     foreignKey: 'user_id',
@@ -43,4 +46,19 @@ User.belongsToMany(User,
         as: 'followed'
     })
 
-module.exports = {User,Post,Comment}
+User.belongsToMany(Pokedex,{
+    through:Ownership,
+    foreignKey: 'user_id',
+    otherKey:'pokemon_id',
+    as: 'collection'
+})
+
+// Pokemon.belongsToMany(User,{
+//     through:Ownership,
+//     foreignKey: 'pokemon_id',
+//     otherKey:'user_id',
+//     as: 'own'
+// })
+
+
+module.exports = {User,Post,Comment,Following,Pokemon,Ownership}

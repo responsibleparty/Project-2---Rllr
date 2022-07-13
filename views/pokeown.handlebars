@@ -1,7 +1,35 @@
+<div class="p-5 mb-4 bg-light rounded-3">
+    <div class="container-fluid py-5">
+        <h1 class="display-5 fw-bold">Packs Opening</h1>
+        <p class="col-md-8 fs-4">Who's that pokemon?</p>
+        <p class="text-muted">Under development</p>
+        <button class="btn btn-info packOpening">Random generator button</button>
+    </div>
+</div>
+
+
+
 <div class="row">
+   
     {{#each pokedex as |card| }}
         <div class="col-md-4 mb-2">
             {{> poke-card card}}
         </div>
     {{/each}}
 </div>
+
+<script>
+   
+    document.querySelector('.packOpening').addEventListener('click',async (e)=>{
+        const response = await fetch('/api/pokemons/game/play', {method:'POST'} )
+        console.log(response)
+        if(response.ok){
+            alert('Congratulation you got a new Pokemon')
+        document.location.reload()
+        }else{
+            alert('something went wrong')
+            document.location.reload()
+        }
+    })
+
+</script>

@@ -18,7 +18,8 @@ Pokemon.init(
         url:{
             type: DataTypes.STRING,
             allowNull: false,
-        }
+        },
+      
     },
     {
         sequelize,

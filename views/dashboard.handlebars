@@ -4,12 +4,33 @@
             <div class="col-4">
                   <h2>{{username}}'s Dashboard</h2>
                   <p>User ID: {{id}} </p>
+                  <div>
+                        <h4 class="text-muted">Following </h4>
+                        {{#each renderData.follow as |follow|}}
+                        <a href="/profile/{{follow.username}}" class="btn btn-sm btn-light m-1">{{follow.username}}</a>
+                        {{/each}}
+                  </div>
+
+                  <div>
+                        <h4 class="text-muted">Followed by </h4>
+                        {{#each renderData.followed as |followed|}}
+                        <a href="/profile/{{followed.username}}"
+                              class="btn btn-sm btn-light m-1">{{followed.username}}</a>
+                        {{/each}}
+                  </div>
             </div>
             <div class="col-8">
                   {{> addpostmodal}}
                   {{>post-card}}
+                  <div class="row">
+                        <h4>Card Collection</h4>
+                        {{#each collection as |card|}}
+                        <div class="col-md-4 mb-3">{{>poke-card-small card }}</div>
+                        {{/each}}
+                  </div>
             </div>
       </div>
+
 
 </div>
 <script src="./js/post.js"></script>

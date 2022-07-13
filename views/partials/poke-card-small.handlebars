@@ -1,0 +1,16 @@
+<div class="poke-card"
+    style="background: radial-gradient(circle at 50% 0%, {{parse_theme this.types}} 36%, rgb(255, 255, 255) 36%);">
+    <p class="hp">
+        <span>ID</span>
+        {{this.id}}
+    </p>
+    <a href="/pokedetail/{{this.name}}">
+        <img style="width:100%;height:auto;" class='animate__animated animate__infinite animate__slower animate__pulse'
+        src="/images/pokemons/{{this.api_id}}.svg">
+    </a>
+    <h4 class="poke-name">{{cap this.name}}</h4>
+
+</div>
+
+
+

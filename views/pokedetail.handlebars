@@ -1,6 +1,6 @@
 <div class="p-5 mb-4 bg-light rounded-3" style="background:url('/images/pokemons/{{newPokemon.id}}.svg') no-repeat center;">
     <div class="container-fluid py-5" >
-        <h1 class="display-5 fw-bold">Detail of {{cap newPokemon.name}}</h1>
+        <h1 class="display-5 fw-bold">{{cap newPokemon.name}}</h1>
     </div>
     <div class="row mb-5">
      <div class="col-lg-6">
@@ -38,6 +38,7 @@
         <div id="detail-stats">
             <h3>Details:</h3>
             <ul>
+                <li><span class="h6">Base EXP:</span> {{base_experience}}</li>
                 <li><span class="h6">In Original Series:</span> {{is_default}}</li>
                 <li><span class="h6">Height:</span> {{height}}</li>
                 <li><span class="h6">Weight</span>: {{weight}}</li>
@@ -98,7 +99,7 @@
             console.log(e.target.value)
             let htmlTemplate = "<div class='row'>"
             const filter = await allPoke.filter(poke => poke.name.startsWith(e.target.value)).map((poke, index) => {
-                htmlTemplate += `<div class='col-md-4 p-2' data-cardname='${poke.name}'>` + buildMyCard(poke, index) + "</div>";
+                htmlTemplate += `<div class='col-md-4 p-2' data-cardname='${poke.name}'>` + buildSimpleCard(poke, index) + "</div>";
             })
             htmlTemplate += "</div>"
             document.querySelector('#result .result-found').textContent = `${filter.length} result(s) found`;

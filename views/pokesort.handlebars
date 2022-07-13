@@ -1,7 +1,8 @@
 <div class="p-5 mb-4 bg-light rounded-3">
     <div class="container-fluid py-5">
         <h1 class="display-5 fw-bold">Squad Builder</h1>
-        <p class="col-md-8 fs-4">Build a squad with your favourite pokemons.</p>
+        <p class="col-md-8 fs-4">Build your dream squad.</p>
+        <p class="text-muted">Search your favourites; drag them to the squad zone.</p>
 
     </div>
 </div>
@@ -59,7 +60,7 @@
             console.log(e.target.value)
             let htmlTemplate = "<div class='row'>"
             const filter = await allPoke.filter(poke => poke.name.startsWith(e.target.value)).map((poke, index) => {
-                htmlTemplate += `<div class='col-md-6 p-2' data-cardname='${poke.name}'>` + buildMyCard(poke, index) + "</div>";
+                htmlTemplate += `<div class='col-md-6 p-2' data-cardname='${poke.name}'>` + buildSimpleCard(poke, index) + "</div>";
             })
             htmlTemplate += "</div>"
             document.querySelector('#result .result-found').textContent = `${filter.length} result(s) found`;

@@ -101,7 +101,8 @@ router.get('/', async (req,res)=>{
                 attributes:{exclude:['password']},
                 include:[
                 {association:'follow', attributes:{exclude:['password']}},
-                {association:'followed', attributes:{exclude:['password']}}
+                {association:'followed', attributes:{exclude:['password']}},
+                {association:'collection', }
             ]
         
         }

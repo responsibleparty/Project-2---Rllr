@@ -1,18 +1,18 @@
 <nav class="navbar bg-primary text-light">
     <div class="container-lg">
         {{!-- <a href="/" class="navbar-brand text-white"> <span class="h1">Rllr-Dex</span></a> --}}
-                <a href="/" class="navbar-brand text-white"><img id="rllrdex-logo" src="./images/rllrdexLogo.png" alt="rllrdex Logo"></a>
+                <a href="/" class="navbar-brand text-white"><img id="rllrdex-logo" src="/images/rllrdexLogo.png" alt="rllrdex Logo"></a>
 
         <ul class="nav nav-pills text-white">
              <li class="nav-item">
-                <a class='nav-link' href="/pokedex">All</a>
+                <a class='nav-link' href="/"><i class="text-white fa-solid fa-rss"></i></a>
             </li>
-            <li class="nav-item">
-                <a class='nav-link' href="/pokeown">Own</a>
-            </li>
+
              <li class="nav-item">
-                <a class='nav-link' href="/pokesort"><i class="fa-solid fa-people-group"></i></a>
+                <a class='nav-link' href="/pokedex"><i class="text-white fa-solid fa-fax"></i></a>
             </li>
+            
+             
             <li class="nav-item">
                 <a class='nav-link' href="/pokedetail"><i class="text-white fa-solid fa-paw"></i></a>
             </li>
@@ -20,6 +20,12 @@
                 <a class='nav-link' href="/profile"><i class="text-white fa-solid fa-id-card"></i></a>
             </li>
             {{#if logged_in}}
+            <li class="nav-item">
+                <a class='nav-link' href="/pokesort"><i class="text-white fa-solid fa-people-group"></i></a>
+            </li>
+            <li class="nav-item">
+                <a class='nav-link' href="/pokeown"><i class="text-white fa-solid fa-dice"></i></a>
+            </li>
             <li class="nav-item">
                 <a class="nav-link" href="/dashboard"><i class="text-white fa-solid fa-user-pen"></i></a>
             </li>
